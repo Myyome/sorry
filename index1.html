@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* background-color: black; */
+        }
+
+        #wrap {
+            margin: 150px auto;
+            position: relative;
+        }
+
+        #wrap h2 {
+            /* color: blanchedalmond; */
+            text-align: center;
+            padding-bottom: 50px;
+
+        }
+
+        #wrap div {
+            text-align: center;
+            margin-right: 150px;
+        }
+
+        #wrap button {
+
+            width: 100px;
+            height: 40px;
+            border: 0;
+            background-color: rgb(6, 250, 116);
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            border-radius: 5px;
+            margin-left: 30px;
+        }
+
+        #wrap .no {
+            position: absolute;
+            background-color: rgb(245, 6, 6);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.3/dist/confetti.browser.min.js"></script>
+</head>
+
+<body id="canvas">
+    <div id="wrap">
+        <h2>可以不可以原谅我</h2>
+        <div>
+            <button id="yes" class="yes">可以</button>
+            <button id="no" class="no">不可以</button>
+        </div>
+
+
+
+    </div>
+</body>
+
+<script>
+    let yes = document.getElementById('yes');
+    let no = document.getElementById('no');
+    let num = 0;
+    let data = [0, 1, 2, 3, 4, 5, 6]
+    var myCanvas = document.createElement('canvas');
+    document.getElementById("canvas").appendChild(myCanvas);
+    var Confetti = confetti.create(myCanvas, {
+        resize: true,
+        useWorker: true
+    });
+    yes.onclick = function () {
+        var end = Date.now() + (30 * 1000);
+
+        var interval = setInterval(function () {
+            if (Date.now() > end) {
+                return clearInterval(interval);
+            }
+
+            confetti({
+                startVelocity: 10,
+                spread: 360,
+                ticks: 60,
+                shapes: ['square'],
+                origin: {
+                    x: Math.random(),
+                    // since they fall down, start a bit higher than random
+                    y: Math.random() - 0.2
+                }
+            });
+        }, 300);
+        this.innerText='谢谢';
+    }
+    no.onclick = function () {
+        let obj = data[(num++) % 4] * sum(50, 100);
+        this.style.left = obj + 'px';
+        this.style.top = obj + 'px';
+
+    }
+    function sum(m, n) {
+        var num = Math.floor(Math.random() * (m - n) + n);
+        return num
+    }
+</script>
+
+</html>

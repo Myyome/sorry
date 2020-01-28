@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.3/dist/confetti.browser.min.js"></script>
+
+<body>
+    <div id="canvas">
+
+    </div>
+</body>
+<script>
+    var myCanvas = document.createElement('canvas');
+    document.getElementById("canvas").appendChild(myCanvas);
+    var Confetti = confetti.create(myCanvas, {
+        resize: true,
+        useWorker: true
+    });
+    var end = Date.now() + (15 * 1000);
+
+(function frame() {
+    confetti({
+        particleCount: 1,
+        startVelocity: 0,
+        ticks: 300,
+        origin: {
+            x: Math.random(),
+            // since they fall down, start a bit higher than random
+            y: Math.random() - 0.2
+        },
+        colors: ['#000'],
+        shapes: ['circle']
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
+    }
+}());
+
+</script>
+
+</html>
